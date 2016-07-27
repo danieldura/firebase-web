@@ -21,3 +21,14 @@ rootRef.on("value", function(snapshot){
 }, function(errorObject){
 	console.log("The read failed: " + errorObject.code);
 });
+
+$("#btnSend").click(function(){
+	var fullname = $("#fullName").val();
+
+	var dataPlayer = {
+		name: fullName,
+		mail: $("#mail").val(),
+		number: $("#number")val(),
+		position: $("position option:selected").text()
+	}
+})

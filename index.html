@@ -36,7 +36,7 @@
                         <label for="nombreCompleto">Nombre completo</label>
                         <div class="input-group">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                            <input type="text" class="form-control" id="nombreCompleto" placeholder="Escribe tu correo...">
+                            <input type="text" class="form-control" id="fullName" placeholder="Escribe tu correo...">
                         </div>
                     </div>
                     <div class="form-group">
@@ -49,26 +49,27 @@
                     <div class="form-group form-inline ">
                         <div class="form-group">
                             <label for="exampleInputFile">Número</label>
-                            <input type="number" class="form-control input-xs" id="exampleInputFile">
+                            <input type="number" class="form-control input-xs" id="number">
                         </div>
                         <div class="form-group spacer-sm">
                             <label for="exampleInputFile">Posición</label>
-                            <select class="form-control ">
-                                <option>Pasador</option>
-                                <option>Corredor</option>
-                                <option>Receptor</option>
-                                <option>Tacle</option>
-                                <option>Centro</option>
-                                <option>Ala</option>
-                                <option>Guardia Nariz</option>
-                                <option>Apoyador</option>
-                                <option>Profundo</option>
-                                <option>Esquinero</option>
+                            <select class="form-control" id="position">
+                                <option>Central</option>
+                                <option>Lateral izquierdo</option>
+                                <option>Lateral derecho</option>
+                                <option>Extremo derecho</option>
+                                <option>Extremo izquierdo</option>
+                                <option>Portero</option>
+                                <option>Pivot</option>
+                                <option>Entrenador</option>                                
+                                <option>Ayudante</option>
+                                <option>Primera linea</option>
+                                <option>Fisio</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group text-center">
-                        <button type="submit" class="btn btn-default">Enviar</button>
+                        <button type="submit" class="btn btn-default" id="btnSend">Enviar</button>
                     </div>
                 </form>
             </div>
