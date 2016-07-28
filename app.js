@@ -37,11 +37,19 @@ $(document).ready(function(){
             position: $("#position option:selected").text()
         }
 
+        var onComplete = function(error){
+        	if (error){
+        		console.log(error,'La sincronización falló');
+        	}else{
+        		console.log(error,'La sincronización ha sido exitosa');
+        	}
+        }
+
         rootRef.once('value', function(snapshot){
             if(snapshot.hasChild(fullName)){
                 $('#myModal').modal('show');
             } else {
-                rootRef.child(fullName).set(dataPlayer);
+                rootRef.child(fullName).set(dataPlayer, onComplete);
             }
 
         })
