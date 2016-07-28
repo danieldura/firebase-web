@@ -12,15 +12,32 @@ $(document).ready(function(){
 			//console.log(player, ',',data[player]);
 
 			row += "<tr>"+
-					"<td>" + player + "</td>" +
+					"<td class=\"playerName\">" + player + "</td>" +
 					"<td>" + data[player].mail + "</td>" +
 					"<td>" + data[player].number + "</td>" +
 					"<td>" + data[player].position + "</td>" +
-				"<tr>"
+					"<td> <div class=\"btnDelete btn btn-danger glyphicon glyphicon-remove\"></div></td>" +
+				"</tr>"
 		}
 		$("#playersTable tbody").append(row);
 
 		row="";
+// ##################################################	
+// ###########  Delete record from firebase #########
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		$(".btnDelete").click(function(){
+			console.log('clicked')
+			var selectedPlayer = $(this).closest("tr")
+				.find(".playerName")
+				.text();
+
+			console.log(selectedPlayer);
+			rootRef.child(selectedPlayer).remove();
+		})
+
+
+
 	}, function(errorObject){
 		console.log("The read failed: " + errorObject.code);
 	});
