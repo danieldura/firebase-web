@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 
 <head>
@@ -12,9 +11,7 @@
     <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
     <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
-
     <!-- Custom files -->
     <link rel="stylesheet" type="text/css" href="base.css">
     <script type="text/javascript" src="app.js"></script>
@@ -61,7 +58,7 @@
                                 <option>Extremo izquierdo</option>
                                 <option>Portero</option>
                                 <option>Pivot</option>
-                                <option>Entrenador</option>                                
+                                <option>Entrenador</option>        
                                 <option>Ayudante</option>
                                 <option>Primera linea</option>
                                 <option>Fisio</option>
@@ -69,7 +66,7 @@
                         </div>
                     </div>
                     <div class="form-group text-center">
-                        <button type="submit" class="btn btn-default" id="btnSend">Enviar</button>
+                        <button id="btnSend" type="submit" class="btn btn-primary btn-block" >Enviar</button>
                     </div>
                 </form>
             </div>
@@ -86,6 +83,20 @@
                     <tbody>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+    <!-- Ventanas modales -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header alert-danger">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Error</h4>
+                </div>
+                <div class="modal-body text-center">
+                    ¡El dato ya existe en la base de datos!
+                </div>
             </div>
         </div>
     </div>

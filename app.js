@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	var rootRef = new Firebase('https://ddura-jugadores.firebaseio.com/');
 	rootRef.on("value", function(snapshot){
-		console.log(snapshot.val())
+		// console.log(snapshot.val())
 		var data = snapshot.val();
 
 		$("#playersTable tbody").empty();
@@ -9,7 +9,7 @@ $(document).ready(function(){
 		var row = "";
 
 		for (player in snapshot.val()){
-			console.log(player, ',',data[player]);
+			//console.log(player, ',',data[player]);
 
 			row += "<tr>"+
 					"<td>" + player + "</td>" +
@@ -19,20 +19,35 @@ $(document).ready(function(){
 				"<tr>"
 		}
 		$("#playersTable tbody").append(row);
+
+		row="";
 	}, function(errorObject){
 		console.log("The read failed: " + errorObject.code);
 	});
+// ##################################################	
+// ###########  Sending data to firebase ############
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+    $("#btnSend").click(function() {
+        var fullName = $("#fullName").val();
 
-	$("#btnSend").click(function(){
-		var fullname = $("#fullName").val();
+        var dataPlayer = {
+            name: fullName,
+            mail: $("#mail").val(),
+            number: $("#number").val(),
+            position: $("#position option:selected").text()
+        }
 
-		var dataPlayer = {
-			name: fullName,
-			mail: $("#mail").val(),
-			number: $("#number").val(),
-			position: $("#position option:selected").text()
-		}
+        rootRef.once('value', function(snapshot){
+            if(snapshot.hasChild(fullName)){
+                $('#myModal').modal('show');
+            } else {
+                rootRef.child(fullName).set(dataPlayer);
+            }
 
-		rootRef.child(fullname).set(dataPlayer);
-	})
+        })
+
+
+       
+
+    })
 });
