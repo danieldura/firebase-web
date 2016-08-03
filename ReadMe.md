@@ -26,3 +26,11 @@ Remain responsive even when a network connection is unavailable
 
 ##Firebase Rules
 
+```
+{
+    "rules": {
+        ".read": "auth.uid != null",
+        ".write": "auth.uid != null"
+    }
+}
+```

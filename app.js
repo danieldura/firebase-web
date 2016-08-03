@@ -84,6 +84,38 @@ $(document).ready(function(){
 		});
 	}
 
+	$("#btnLogin").click(function(){
+		$("#btnLogin").toggle();
+		$("#btnLogout").toggle();
+		login();
+
+	})
+
+	$("btnLogout").click(function(){
+		$("#btnLogin").toggle();
+		$("#btnLogout")toggle();
+
+	})
+
+	var setDataLabels = function(authData){
+		$("#authUser").text();
+		$(".usrPhoto").css('background-image','url('++')');
+		$("#authProvider").text();
+		$(".authUserData").toggle();
+	}
+
+	var clearDataLabels = function(authData){
+		$("#authUser").text("");
+		$(".usrPhoto").css('background-image','none');
+		$("#authProvider").text("");
+		$(".authUserData").toggle();
+	}
+
+
+	var login = function(){
+
+	}
+
 	// ##################################################	
 	// ###########  Sending data to firebase ############
 	// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
