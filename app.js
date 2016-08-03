@@ -114,6 +114,18 @@ $(document).ready(function(){
 		$(".authUserData").toggle();
 	}
 
+	var authData = rootRef.getAuth();
+	if(authData){
+		console.log("Usuario "+ authData.uid + " logueado con " + authData.provider);
+		$("#btnLogin").toggle();
+		$("#btnLogout").toggle();
+		getData();
+	}else{
+		console.log("El usuario ha cerrado sesión");
+
+	}
+
+
 
 	var login = function(){
 		rootRef.authWithOAuthPopup("facebook", function(error, authData){
