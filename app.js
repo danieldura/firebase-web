@@ -101,9 +101,11 @@ $(document).ready(function(){
 	})
 
 	var setDataLabels = function(authData){
-		$("#authUser").text();
-		$(".usrPhoto").css('background-image','url(' + + ')');
-		$("#authProvider").text();
+		console.log(authData);
+
+		$("#authUser").text(authData[authData.provider].displayName);
+		$(".usrPhoto").css('background-image','url(' + authData[authData.provider].profileImageURL + ')');
+		$("#authProvider").text(authData.provider);
 		$(".authUserData").toggle();
 	}
 
@@ -120,6 +122,7 @@ $(document).ready(function(){
 		$("#btnLogin").toggle();
 		$("#btnLogout").toggle();
 		getData();
+		setDataLabels(authData);
 	}else{
 		console.log("El usuario ha cerrado sesión");
 
@@ -134,6 +137,7 @@ $(document).ready(function(){
 			}else{
 				console.log("El login se realizó correctamente", authData);
 				getData();
+				setDataLabels(authData);
 			}
 		})
 	}
