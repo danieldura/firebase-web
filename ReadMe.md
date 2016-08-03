@@ -23,3 +23,6 @@ Firebase is a real time application platform. It allows developers to build rich
 Can be built rapidly
 Update in realtime out-of-the-box
 Remain responsive even when a network connection is unavailable
+
+##Firebase Rules
+

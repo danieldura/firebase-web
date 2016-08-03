@@ -1,79 +1,88 @@
 $(document).ready(function(){
-		var rootRef = new Firebase('https://ddura-jugadores.firebaseio.com/');
+
+	$("#btnLogout").hide();
+	$(".authUserData").hide();
+	$("#btnSend").click(sendData);
+
+	var rootRef = new Firebase('https://ddura-jugadores.firebaseio.com/');
+	
+	var getData = function() {		
+
 		rootRef.on("value", function(snapshot){
-			// console.log(snapshot.val())
-			var data = snapshot.val();
+		// console.log(snapshot.val())
+		var data = snapshot.val();
 
-			$("#playersTable tbody").empty();
+		$("#playersTable tbody").empty();
 
-			var row = "";
+		var row = "";
 
-			for (player in snapshot.val()){
-				//console.log(player, ',',data[player]);
+		for (player in snapshot.val()){
+			//console.log(player, ',',data[player]);
 
-				row += "<tr>"+
-						"<td class=\"playerName\">" + player + "</td>" +
-						"<td class=\"mail\">" + data[player].mail + "</td>" +
-						"<td class=\"number\">" + data[player].number + "</td>" +
-						"<td class=\"position\">" + data[player].position + "</td>" +
-						"<td> <div class=\"btnEdit btn btn-warning glyphicon glyphicon-edit\"></div> </td>" +
-						"<td> <div class=\"btnDelete btn btn-danger glyphicon glyphicon-remove\"></div></td>" +
-					"</tr>"
-			}
-			$("#playersTable tbody").append(row);
+			row += "<tr>"+
+					"<td class=\"playerName\">" + player + "</td>" +
+					"<td class=\"mail\">" + data[player].mail + "</td>" +
+					"<td class=\"number\">" + data[player].number + "</td>" +
+					"<td class=\"position\">" + data[player].position + "</td>" +
+					"<td> <div class=\"btnEdit btn btn-warning glyphicon glyphicon-edit\"></div> </td>" +
+					"<td> <div class=\"btnDelete btn btn-danger glyphicon glyphicon-remove\"></div></td>" +
+				"</tr>"
+		}
+		$("#playersTable tbody").append(row);
 
-			row="";
-	// ##################################################	
-	// ###########  Delete record from firebase #########
-	// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		row="";
+// ##################################################	
+// ###########  Delete record from firebase #########
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-			$(".btnDelete").click(function(){
-				console.log('clicked')
-				var selectedPlayer = $(this).closest("tr")
-					.find(".playerName")
-					.text();
-
-				console.log(selectedPlayer);
-				rootRef.child(selectedPlayer).remove();
-			})
-
-
-	// ##################################################	
-	// ###########  Edit record from firebase ###########
-	// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-			$(".btnEdit").click(function(){
-				console.log('Button edit clicked');
-				var selectedPlayer = $(this).closest("tr")
+		$(".btnDelete").click(function(){
+			console.log('clicked')
+			var selectedPlayer = $(this).closest("tr")
 				.find(".playerName")
 				.text();
 
-				$("#fullName").val($(this).closest("tr").find(".playerName").text());
-				$("#mail").val($(this).closest("tr").find(".mail").text());
-				$("#number").val($(this).closest("tr").find(".number").text());
-				$("#position").val($(this).closest("tr").find(".position").text());
-				$("#btnSend").text("Actualizar").removeClass("btn-primary").addClass("btn-warning").unbind("click").click(function(){
-					rootRef.child(selectedPlayer).update({
-						mail: $("#mail").val(),
-						number: $("#number").val(),
-						position: $("#position option:selected").text()				
-					},function(){
-						$("#fullName").val("");
-						$("#mail").val("");
-						$("#number").val("");
-						$("#position").val("");
-						$("#btnSend").text("Enviar").removeClass("btn-warning").addClass("btn-primary").unbind("click").click(sendData);
-					})
-
-				});
-
-			})
-
-			$("#btnSend").click(sendData);
+			console.log(selectedPlayer);
+			rootRef.child(selectedPlayer).remove();
+		})
 
 
-	}, function(errorObject){
-			console.log("The read failed: " + errorObject.code);
-	});
+// ##################################################	
+// ###########  Edit record from firebase ###########
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		$(".btnEdit").click(function(){
+			//console.log('Button edit clicked');
+			var selectedPlayer = $(this).closest("tr")
+			.find(".playerName")
+			.text();
+
+			$("#fullName").val($(this).closest("tr").find(".playerName").text());
+			$("#mail").val($(this).closest("tr").find(".mail").text());
+			$("#number").val($(this).closest("tr").find(".number").text());
+			$("#position").val($(this).closest("tr").find(".position").text());
+			$("#btnSend").text("Actualizar").removeClass("btn-primary").addClass("btn-warning").unbind("click").click(function(){
+				rootRef.child(selectedPlayer).update({
+					mail: $("#mail").val(),
+					number: $("#number").val(),
+					position: $("#position option:selected").text()				
+				},function(){
+					$("#fullName").val("");
+					$("#mail").val("");
+					$("#number").val("");
+					$("#position").val("");
+					$("#btnSend").text("Enviar").removeClass("btn-warning").addClass("btn-primary").unbind("click").click(sendData);
+				})
+
+			});
+
+		})
+
+		$("#btnSend").click(sendData);
+
+
+		}, function(errorObject){
+				console.log("The read failed: " + errorObject.code);
+		});
+	}
 
 	// ##################################################	
 	// ###########  Sending data to firebase ############
