@@ -91,15 +91,18 @@ $(document).ready(function(){
 
 	})
 
-	$("btnLogout").click(function(){
+	$("#btnLogout").click(function(){
 		$("#btnLogin").toggle();
-		$("#btnLogout")toggle();
-
+		$("#btnLogout").toggle();
+		clearDataLabels();
+		rootRef.unauth();
+		$("#playersTable tbody").empty();
+		$("#myModalNoSession").modal("show");
 	})
 
 	var setDataLabels = function(authData){
 		$("#authUser").text();
-		$(".usrPhoto").css('background-image','url('++')');
+		$(".usrPhoto").css('background-image','url(' + + ')');
 		$("#authProvider").text();
 		$(".authUserData").toggle();
 	}
@@ -113,7 +116,14 @@ $(document).ready(function(){
 
 
 	var login = function(){
-
+		rootRef.authWithOAuthPopup("facebook", function(error, authData){
+			if(error){
+				console.log("El login falló ", error);
+			}else{
+				console.log("El login se realizó correctamente", authData);
+				getData();
+			}
+		})
 	}
 
 	// ##################################################	
