@@ -34,3 +34,40 @@ Remain responsive even when a network connection is unavailable
     }
 }
 ```
+
+##Web Server with python
+on the terminal
+python3 -m http.server
+
+
+## Proceso de indexado de datos
+
+
+```
+".indexOn": ["name", "position","number"]
+```
+
+## Validación de la esctructura de datos
+```
+{
+    "rules": {
+        ".read": "auth.uid != null",
+        ".write": "auth.uid != null",
+        ".validate":"newData.child('number').isNumber() && newData.hasChildren(['mail','number','position'])"
+    }
+}
+```
+
+## Control de acceso por valor eb bases de datos
+
+```
+
+{
+    "rules": {
+        ".read": "data.child('Sergio Brito').child('position').val()=='central'",
+        ".write": "auth.uid != null",
+    }
+}
+```
+## Uso de variables en reglas y procesos de autenticación
+
