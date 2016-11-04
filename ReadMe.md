@@ -15,6 +15,7 @@ create, read, update and delete are the four basic functions of persistent stora
 
 
 
+
 ##Description
 What is Firebase?
 
@@ -23,6 +24,9 @@ Firebase is a real time application platform. It allows developers to build rich
 Can be built rapidly
 Update in realtime out-of-the-box
 Remain responsive even when a network connection is unavailable
+
+
+#Reglas de seguridad con las bases de datos de Firebase
 
 ##Firebase Rules
 
@@ -70,4 +74,11 @@ python3 -m http.server
 }
 ```
 ## Uso de variables en reglas y procesos de autenticación
+
+
+# Publicar tu aplicación Web mediante el hosting de Firebase
+
+Herramientas:
+
+
 
