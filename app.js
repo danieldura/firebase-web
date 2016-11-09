@@ -102,7 +102,7 @@ $(document).ready(function(){
 
 	var setDataLabels = function(authData){
 		console.log(authData);
-
+		$(".authUser").html('<div class="usrPhoto"></div>Bienvenido <label id="authUser"></label> has iniciado sesión con <label id="authProvider"></label>');
 		$("#authUser").text(authData[authData.provider].displayName);
 		$(".usrPhoto").css('background-image','url(' + authData[authData.provider].profileImageURL + ')');
 		$("#authProvider").text(authData.provider);
