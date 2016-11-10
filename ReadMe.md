@@ -39,9 +39,11 @@ Remain responsive even when a network connection is unavailable
 }
 ```
 
-##Web Server with python
-on the terminal
-python3 -m http.server
+##Try project
+On the terminal
+
+`python3 -m http.server`
+
 
 
 ## Proceso de indexado de datos
@@ -82,3 +84,8 @@ Herramientas:
 
 
 
+## Features
+### ToDO
+
+- Update to GoogleFirebase
+- Upload archives to Firebase Storage (With class FirebaseFileUploader.js with ES2015)
