@@ -4,7 +4,11 @@ $(document).ready(function(){
 	$(".authUserData").hide();
 	$("#btnSend").click(sendData);
 
-	var rootRef = new Firebase('https://ddura-jugadores.firebaseio.com/');
+	// var rootRef = new Firebase('https://ddura-jugadores.firebaseio.com/');
+	var database = firebase.database();
+	var oauth = firebase.auth();
+	var provider = new firebase.auth.FacebookAuthProvider();
+	var rootRef = database.ref();
 	
 	var getData = function() {		
 
@@ -95,8 +99,9 @@ $(document).ready(function(){
 		$("#btnLogin").toggle();
 		$("#btnLogout").toggle();
 		clearDataLabels();
-		rootRef.unauth();
+		oauth.signOut();
 		$("#playersTable tbody").empty();
+		$(".usrPhoto").empty();
 		$("#myModalNoSession").modal("show");
 	})
 
@@ -116,7 +121,7 @@ $(document).ready(function(){
 		$(".authUserData").toggle();
 	}
 
-	var authData = rootRef.getAuth();
+	var authData = oauth.currentUser;
 	if(authData){
 		console.log("Usuario "+ authData.uid + " logueado con " + authData.provider);
 		$("#btnLogin").toggle();
@@ -128,17 +133,22 @@ $(document).ready(function(){
 
 	}
 
-
-
 	var login = function(){
-		rootRef.authWithOAuthPopup("facebook", function(error, authData){
-			if(error){
-				console.log("El login falló ", error);
-			}else{
-				console.log("El login se realizó correctamente", authData);
-				getData();
-				setDataLabels(authData);
-			}
+		// oauth.authWithOAuthPopup("facebook", function(error, authData){
+		// 	if(error){
+		// 		console.log("El login falló ", error);
+		// 	}else{
+		// 		console.log("El login se realizó correctamente", authData);
+		// 		getData();
+		// 		setDataLabels(authData);
+		// 	}
+		// })
+
+		oauth.signInWithPopup(provider).then(function(authData){
+			getData();
+			setDataLabels(authData.user);
+		}).catch(function(error){
+			console.log("El login falló ", error);
 		})
 	}
 

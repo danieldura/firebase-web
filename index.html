@@ -11,9 +11,22 @@
     <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+    <!--<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>-->
     <!-- Custom files -->
     <link rel="stylesheet" type="text/css" href="base.css">
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCRiX2B2qQpX5E1OYqemgcCO0nnjM8X0aE",
+        authDomain: "vinosvalencia-bd1ef.firebaseapp.com",
+        databaseURL: "https://vinosvalencia-bd1ef.firebaseio.com",
+        storageBucket: "vinosvalencia-bd1ef.appspot.com",
+        messagingSenderId: "203191376541"
+      };
+      firebase.initializeApp(config);
+    </script>
     <script type="text/javascript" src="app.js"></script>
 </head>
 
@@ -80,7 +93,7 @@
                         
                     </div>
                     <div class="form-group">
-                            <span class="btn btn-primary btn-file">Subir imagen</span>
+                            <span  id="btnUpload" class="btn btn-primary btn-file">Subir imagen</span>
                         </div>
                     <div class="form-group text-center">
                         <div id="btnSend" type="submit" class="btn btn-primary btn-block" >Enviar</div>
