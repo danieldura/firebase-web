@@ -5,6 +5,8 @@ $(document).ready(function(){
 	$("#btnSend").click(sendData);
 
 	// var rootRef = new Firebase('https://ddura-jugadores.firebaseio.com/');
+	var file, fileName, fileRef, storageImagesRef, storageRef, uploadTask, downloadURL;
+	var storageFolder="/img/"
 	var database = firebase.database();
 	var oauth = firebase.auth();
 	var provider = new firebase.auth.FacebookAuthProvider();
@@ -78,7 +80,7 @@ $(document).ready(function(){
 
 			});
 
-		})
+		});
 
 		$("#btnSend").click(sendData);
 
@@ -87,7 +89,26 @@ $(document).ready(function(){
 				console.log("The read failed: " + errorObject.code);
 		});
 	}
+//#################### END getData ##################
+//*****************************************************
+	$("#btnUpload").change(function(){
+		file 		= document.getElementById("btnUpload").files[0];
+		fileName 	= file.name;
+		storageRef 	= firebase.storage().ref(storageFolder + fileName);
+		uploadTask 	= storageRef.put(file);
 
+		uploadTask.on('state_changed', function(snapshot){
+
+
+		}, function(error){
+			console.log("Error uploadTask " + error)
+		}, function(){
+			downloadURL = uploadTask.snapshot.downloadURL;
+			console.log("URL de la imagen:"+downloadURL);
+			$("#btnUpload").addClass("btn-success");
+		});
+	})
+	
 	$("#btnLogin").click(function(){
 		$("#btnLogin").toggle();
 		$("#btnLogout").toggle();
@@ -105,13 +126,17 @@ $(document).ready(function(){
 		$("#myModalNoSession").modal("show");
 	})
 
-	var setDataLabels = function(authData){
-		console.log(authData);
-		$(".authUser").html('<div class="usrPhoto"></div>Bienvenido <label id="authUser"></label> has iniciado sesión con <label id="authProvider"></label>');
-		$("#authUser").text(authData[authData.provider].displayName);
-		$(".usrPhoto").css('background-image','url(' + authData[authData.provider].profileImageURL + ')');
-		$("#authProvider").text(authData.provider);
-		$(".authUserData").toggle();
+	var setDataLabels = function(user){
+		console.log(user);
+		if (user != null) {
+	  		user.providerData.forEach(function(profile){
+				$(".authUser").html('<div class="usrPhoto"></div>Bienvenido <label id="authUser"></label> has iniciado sesión con <label id="authProvider"></label>');
+				$("#authUser").text(profile.displayName);
+				$(".usrPhoto").css('background-image','url(' + profile.photoURL + ')');
+				$("#authProvider").text(profile.providerId);
+				$(".authUserData").toggle();
+			})
+  		}
 	}
 
 	var clearDataLabels = function(authData){
@@ -121,17 +146,19 @@ $(document).ready(function(){
 		$(".authUserData").toggle();
 	}
 
-	var authData = oauth.currentUser;
-	if(authData){
-		console.log("Usuario "+ authData.uid + " logueado con " + authData.provider);
-		$("#btnLogin").toggle();
-		$("#btnLogout").toggle();
-		getData();
-		setDataLabels(authData);
-	}else{
-		console.log("El usuario ha cerrado sesión");
+	var authData = firebase.auth().onAuthStateChanged(function(user) {
+	  	if (user) {
+		
+			console.log("Usuario "+ user.uid + " logueado con " + user.provider);
+			$("#btnLogin").toggle();
+			$("#btnLogout").toggle();
+			getData();
+			setDataLabels(user);
+		}else{
+			console.log("El usuario ha cerrado sesión");
 
-	}
+		}
+	});
 
 	var login = function(){
 		// oauth.authWithOAuthPopup("facebook", function(error, authData){

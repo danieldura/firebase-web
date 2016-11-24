@@ -87,5 +87,6 @@ Herramientas:
 ## Features
 ### ToDO
 
-- Update to GoogleFirebase
+- Update to GoogleFirebase (v)
+- Upload images to firebase Storage
 - Upload archives to Firebase Storage (With class FirebaseFileUploader.js with ES2015)
