@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	$("#btnLogout").hide();
 	$(".authUserData").hide();
-	$("#btnSend").click(sendData);
+	
 
 	// var rootRef = new Firebase('https://ddura-jugadores.firebaseio.com/');
 	var file, fileName, fileRef, storageImagesRef, storageRef, uploadTask, downloadURL;
@@ -89,6 +89,7 @@ $(document).ready(function(){
 				console.log("The read failed: " + errorObject.code);
 		});
 	}
+
 //#################### END getData ##################
 //*****************************************************
 	$("#btnUpload").change(function(){
@@ -106,6 +107,7 @@ $(document).ready(function(){
 			downloadURL = uploadTask.snapshot.downloadURL;
 			console.log("URL de la imagen:"+downloadURL);
 			$("#btnUpload").addClass("btn-success");
+			$("#btnSend").click(sendData);
 		});
 	})
 	
@@ -186,13 +188,14 @@ $(document).ready(function(){
 	    var fullName = $("#fullName").val();
 
 	    var dataPlayer = {
-	        name: fullName,
-	        mail: $("#mail").val(),
-	        number: $("#number").val(),
-	        position: $("#position option:selected").text()
+	        	name: fullName,
+	        	mail: $("#mail").val(),
+	        	number: $("#number").val(),
+	        	position: $("#position option:selected").text(),
+	        	image : downloadURL
 	    }
 
-	    var onComplete = function(error){
+	   	var onComplete = function(error){
 	    	if (error){
 	    		console.log(error,'La sincronización falló');
 	    	}else{
@@ -205,9 +208,9 @@ $(document).ready(function(){
 	            $('#myModal').modal('show');
 	        } else {
 	            rootRef.child(fullName).set(dataPlayer, onComplete);
-	        }
 
-	    })      
+	        }
+	    })
 
 	}
 });
