@@ -2,6 +2,7 @@ $(document).ready(function(){
 
 	$("#btnLogout").hide();
 	$(".authUserData").hide();
+	
 
 
 	// var rootRef = new Firebase('https://ddura-jugadores.firebaseio.com/');
@@ -30,8 +31,9 @@ $(document).ready(function(){
 					"<td class=\"mail\">" + data[player].mail + "</td>" +
 					"<td class=\"number\">" + data[player].number + "</td>" +
 					"<td class=\"position\">" + data[player].position + "</td>" +
-					"<td> <div class=\"btnEdit btn btn-warning glyphicon glyphicon-edit\"></div> </td>" +
-					"<td> <div class=\"btnDelete btn btn-danger glyphicon glyphicon-remove\"></div></td>" +
+					"<td class\"image\"><img class=\"img-responsive\" src=\""+ data[player].image +"\" alt=\"" + player + "\"></td>  " +
+					"<td class=\"btnsEdit hidden\"> <div class=\"btnEdit btn btn-warning glyphicon glyphicon-edit\"></div> </td>" +
+					"<td class=\"btnsEdit hidden\"> <div class=\"btnDelete btn btn-danger glyphicon glyphicon-remove\"></div></td>" +
 				"</tr>"
 		}
 		$("#playersTable tbody").append(row);
@@ -65,7 +67,7 @@ $(document).ready(function(){
 			$("#mail").val($(this).closest("tr").find(".mail").text());
 			$("#number").val($(this).closest("tr").find(".number").text());
 			$("#position").val($(this).closest("tr").find(".position").text());
-			$("#btnSend").text("Actualizar").removeClass("btn-primary").addClass("btn-warning").unbind("click").click(function(){
+			$("#btnSend").text("Actualizar").removeClass("disabled").removeClass("btn-primary").addClass("btn-warning").unbind("click").click(function(){
 				rootRef.child(selectedPlayer).update({
 					mail: $("#mail").val(),
 					number: $("#number").val(),
@@ -75,14 +77,14 @@ $(document).ready(function(){
 					$("#mail").val("");
 					$("#number").val("");
 					$("#position").val("");
-					$("#btnSend").text("Enviar").removeClass("btn-warning").addClass("btn-primary").unbind("click").click(sendData);
+					$("#btnSend").text("Enviar").removeClass("btn-warning").addClass("btn-primary").unbçind("click");
 				})
 
 			});
 
 		});
 
-		$("#btnSend").click(sendData);
+		// $("#btnSend").click(sendData);
 
 
 		}, function(errorObject){
@@ -107,7 +109,7 @@ $(document).ready(function(){
 			downloadURL = uploadTask.snapshot.downloadURL;
 			console.log("URL de la imagen:"+downloadURL);
 			$("#btnUpload").addClass("btn-success");
-			$("#btnSend").click(sendData);
+			$("#btnSend").removeClass("disabled").click(sendData);
 		});
 	})
 
@@ -198,7 +200,6 @@ $(document).ready(function(){
 	            $('#myModal').modal('show');
 	        } else {
 	            rootRef.child(fullName).set(dataPlayer, onComplete);
-
 	        }
 	    })
 

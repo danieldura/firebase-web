@@ -78,15 +78,29 @@ On the terminal
 ## Uso de variables en reglas y procesos de autenticación
 
 
-# Publicar tu aplicación Web mediante el hosting de Firebase
+# Publish on firebase Google Hosting
 
-Herramientas:
+Tools: node
 
+# Rules to Storage
+```
+service firebase.storage {
+  match /b/vinosvalencia-bd1ef.appspot.com/o {
+    match /{allPaths=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+
+
+
+```
 
 
 ## Features
 ### ToDO
 
-- Update to GoogleFirebase (v)
-- Upload images to firebase Storage
+- Update to GoogleFirebase (/)
+- Upload images to firebase Storage (/)
 - Upload archives to Firebase Storage (With class FirebaseFileUploader.js with ES2015)
+- Show image on table
