@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	$("#btnLogout").hide();
 	$(".authUserData").hide();
-	
+
 
 	// var rootRef = new Firebase('https://ddura-jugadores.firebaseio.com/');
 	var file, fileName, fileRef, storageImagesRef, storageRef, uploadTask, downloadURL;
@@ -11,8 +11,8 @@ $(document).ready(function(){
 	var oauth = firebase.auth();
 	var provider = new firebase.auth.FacebookAuthProvider();
 	var rootRef = database.ref();
-	
-	var getData = function() {		
+
+	var getData = function() {
 
 		rootRef.on("value", function(snapshot){
 		// console.log(snapshot.val())
@@ -37,7 +37,7 @@ $(document).ready(function(){
 		$("#playersTable tbody").append(row);
 
 		row="";
-// ##################################################	
+// ##################################################
 // ###########  Delete record from firebase #########
 // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
@@ -52,7 +52,7 @@ $(document).ready(function(){
 		})
 
 
-// ##################################################	
+// ##################################################
 // ###########  Edit record from firebase ###########
 // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 		$(".btnEdit").click(function(){
@@ -69,7 +69,7 @@ $(document).ready(function(){
 				rootRef.child(selectedPlayer).update({
 					mail: $("#mail").val(),
 					number: $("#number").val(),
-					position: $("#position option:selected").text()				
+					position: $("#position option:selected").text()
 				},function(){
 					$("#fullName").val("");
 					$("#mail").val("");
@@ -110,7 +110,7 @@ $(document).ready(function(){
 			$("#btnSend").click(sendData);
 		});
 	})
-	
+
 	$("#btnLogin").click(function(){
 		$("#btnLogin").toggle();
 		$("#btnLogout").toggle();
@@ -150,7 +150,7 @@ $(document).ready(function(){
 
 	var authData = firebase.auth().onAuthStateChanged(function(user) {
 	  	if (user) {
-		
+
 			console.log("Usuario "+ user.uid + " logueado con " + user.provider);
 			$("#btnLogin").toggle();
 			$("#btnLogout").toggle();
@@ -163,16 +163,6 @@ $(document).ready(function(){
 	});
 
 	var login = function(){
-		// oauth.authWithOAuthPopup("facebook", function(error, authData){
-		// 	if(error){
-		// 		console.log("El login falló ", error);
-		// 	}else{
-		// 		console.log("El login se realizó correctamente", authData);
-		// 		getData();
-		// 		setDataLabels(authData);
-		// 	}
-		// })
-
 		oauth.signInWithPopup(provider).then(function(authData){
 			getData();
 			setDataLabels(authData.user);
@@ -181,7 +171,7 @@ $(document).ready(function(){
 		})
 	}
 
-	// ##################################################	
+	// ##################################################
 	// ###########  Sending data to firebase ############
 	// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 	function sendData() {
