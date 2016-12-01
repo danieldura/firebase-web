@@ -31,7 +31,7 @@ $(document).ready(function(){
 					"<td class=\"mail\">" + data[player].mail + "</td>" +
 					"<td class=\"number\">" + data[player].number + "</td>" +
 					"<td class=\"position\">" + data[player].position + "</td>" +
-					"<td class\"image\"><img class=\"img-responsive\" src=\""+ data[player].image +"\" alt=\"" + player + "\"></td>  " +
+					"<td class\"image\"><img class=\"img-responsive img-circle\" src=\""+ data[player].image +"\" alt=\"" + player + "\"></td>  " +
 					"<td class=\"btnsEdit hidden\"> <div class=\"btnEdit btn btn-warning glyphicon glyphicon-edit\"></div> </td>" +
 					"<td class=\"btnsEdit hidden\"> <div class=\"btnDelete btn btn-danger glyphicon glyphicon-remove\"></div></td>" +
 				"</tr>"
