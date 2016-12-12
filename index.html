@@ -16,17 +16,6 @@
     <link rel="stylesheet" type="text/css" href="base.css">
 
     <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
-    <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyCRiX2B2qQpX5E1OYqemgcCO0nnjM8X0aE",
-        authDomain: "vinosvalencia-bd1ef.firebaseapp.com",
-        databaseURL: "https://vinosvalencia-bd1ef.firebaseio.com",
-        storageBucket: "vinosvalencia-bd1ef.appspot.com",
-        messagingSenderId: "203191376541"
-      };
-      firebase.initializeApp(config);
-    </script>
     <script type="text/javascript" src="app.js"></script>
 </head>
 
@@ -104,11 +93,12 @@
                 <table id="playersTable" class="table table-hover table-bordered table-striped">
                     <thead>
                         <tr class="info">
+                            <th>Imágen</th>
                             <th>Nombre</th>
                             <th>Correo</th>
                             <th>Número</th>
                             <th>Posición</th>
-                            <th colspan="2"><div class="btn btn-warning btn-block glyphicon glyphicon-edit spacer">EDIT</div></th>
+                            <th colspan="2"></th>
                         </tr>
                     </thead>
                     <tbody>

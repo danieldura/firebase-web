@@ -1,5 +1,12 @@
+	var config = {
+    apiKey: "AIzaSyCRiX2B2qQpX5E1OYqemgcCO0nnjM8X0aE",
+    authDomain: "vinosvalencia-bd1ef.firebaseapp.com",
+    databaseURL: "https://vinosvalencia-bd1ef.firebaseio.com",
+    storageBucket: "vinosvalencia-bd1ef.appspot.com",
+    messagingSenderId: "203191376541"
+    };
+    firebase.initializeApp(config);
 $(document).ready(function(){
-
 	$("#btnLogout").hide();
 	$(".authUserData").hide();
 	
@@ -27,13 +34,13 @@ $(document).ready(function(){
 			//console.log(player, ',',data[player]);
 
 			row += "<tr>"+
+					"<td class\"image\"><img class=\"img-responsive img-rounded\" src=\""+ data[player].image +"\" alt=\"" + player + "\"></td>  " +
 					"<td class=\"playerName\">" + player + "</td>" +
 					"<td class=\"mail\">" + data[player].mail + "</td>" +
 					"<td class=\"number\">" + data[player].number + "</td>" +
-					"<td class=\"position\">" + data[player].position + "</td>" +
-					"<td class\"image\"><img class=\"img-responsive img-circle\" src=\""+ data[player].image +"\" alt=\"" + player + "\"></td>  " +
-					"<td class=\"btnsEdit hidden\"> <div class=\"btnEdit btn btn-warning glyphicon glyphicon-edit\"></div> </td>" +
-					"<td class=\"btnsEdit hidden\"> <div class=\"btnDelete btn btn-danger glyphicon glyphicon-remove\"></div></td>" +
+					"<td class=\"position\">" + data[player].position + "</td>" +					
+					"<td class=\"btnsEdit\"> <div class=\"btnEdit btn btn-warning glyphicon glyphicon-edit\"></div> </td>" +
+					"<td class=\"btnsEdit\"> <div class=\"btnDelete btn btn-danger glyphicon glyphicon-remove\"></div></td>" +
 				"</tr>"
 		}
 		$("#playersTable tbody").append(row);
